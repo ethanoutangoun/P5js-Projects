@@ -1,10 +1,6 @@
 /*
-By Ethan Outangoun
-Professor Mork CPE 123-03
-Approximate A design by Blexbolex
-Objective: Use three variables to represent scale, x and y translation
+Ethan Outangoun and Thomas Lundy
 
-Quick note: I didn't know we weren't supposed to use functions inside of functions until my drawing was already complete :/
 
 
 */
