@@ -16,6 +16,12 @@ var sE=1;
 var rE = 0
 var man = false;
 
+//Constants for the gradient background
+const Y_AXIS = 1;
+const X_AXIS = 2;
+let c1, c2;
+
+
 var backgroundColor = ('#88c4f2');
 var streetColor = ("#808080");
 var streetLineColor = ("ffffff")
@@ -58,19 +64,18 @@ function drawCarTop(posX, posY, valScale){
     circle(25, 0, 15);
 }
 
-function drawCarBottom(posX, posY, valScale){
-    translate(posX, posY);
-    scale(valScale);
-    fill("#d1cf34");
-    rect(-50, -20, 100, 20, 5);
-    quad(-30, -20, -15, -35, -10, -35, -10, -20);
-    quad(10, -20, 10, -35, 15, -35, 35, -20);
-    rect(-15, -35, 30, 5);
-    fill(0);
-    circle(-25, 0, 15);
-    circle(25, 0, 15);
+function setGradient(x, y, w, h, c1, c2, axis) {
+  noFill();
+  if (axis === X_AXIS) {
+    // Left to right gradient
+    for (let i = x; i <= x + w; i++) {
+      let inter = map(i, x, x + w, 0, 1);
+      let c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(i, y, i, y + h);
+    }
+  }
 }
-
 
 
 
@@ -417,11 +422,22 @@ function rope(x,y)
 
 function setup() {
 	createCanvas(1264, 750);
+	
+	//define the gradient colors
+	push();
+	c1 = color(250,225,192);
+	c2 = color(6, 87, 201);
+	noLoop();
+	pop();
 }
 
 
 function draw() {
 	background(250,225,192);
+	
+	//Call the gradient function
+	setGradient(0, 0, width, height, c1, c2, Y_AXIS);
+  	setGradient(0, 0, width, height, c2, c1, X_AXIS);
 	//Bottom Dock
 	noStroke();
 
